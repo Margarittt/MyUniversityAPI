@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication10.Domain.Models;
 using WebApplication10.Domain.Services;
@@ -47,7 +44,7 @@ namespace WebApplication10.Controllers
             var result = await countryService.SaveAsync(country);
 
             if (!result.Success)
-                return BadRequest(result.Message);
+                return BadRequest(result);
 
             //var countryResource = mapper.Map<Country, CountryResource>(result.Data);
             
@@ -67,9 +64,9 @@ namespace WebApplication10.Controllers
             var result = await countryService.UpdateAsync(id, country);
 
             if (!result.Success)
-                return BadRequest(result.Message);
+                return BadRequest(result);
 
-            var countryResource = mapper.Map<Country, CountryResource>(result.Country);
+            //var countryResource = mapper.Map<Country, CountryResource>(result.Data);
             return Ok(result);
         }
         /// <summary>
@@ -83,10 +80,10 @@ namespace WebApplication10.Controllers
             var result = await countryService.DeleteAsync(id);
 
             if (!result.Success)
-                return BadRequest(result.Message);
+                return BadRequest(result);
 
-            var countryResource = mapper.Map<Country, CountryResource>(result.Country);
-            return Ok(countryResource);
+            //var countryResource = mapper.Map<Country, CountryResource>(result.Data);
+            return Ok(result);
         }
     }
 }

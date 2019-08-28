@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using WebApplication10.Domain.Models;
 using WebApplication10.Domain.Repositories;
 using WebApplication10.Domain.Services;
-using WebApplication10.Domain.Services.ResponseResult;
 
 namespace WebApplication10.Services
 {
@@ -79,24 +78,35 @@ namespace WebApplication10.Services
                 };
             }
         }
-        public async Task<CountryResponse> DeleteAsync(int id)
+        public async Task<ResponseModel<Country>> DeleteAsync(int id)
         {
             var existingCountry = await countryRepository.FindByIdAsync(id);
 
             if (existingCountry == null)
-                return new CountryResponse("Country not found.");
+                return new ResponseModel<Country>
+                {
+                    Success = false,
+                    Message = "Country not found."
+                };
 
             try
             {
                 countryRepository.Remove(existingCountry);
                 await unitOfWork.CompleteAsync();
 
-                return new CountryResponse(existingCountry);
+                return new ResponseModel<Country>()
+                {
+                    Success = true,
+                    Message = "Successfully removed!!"
+                };
             }
             catch (Exception ex)
             {
-                // Do some logging stuff
-                return new CountryResponse($"An error occurred when deleting the country: {ex.Message}");
+                return new ResponseModel<Country>()
+                {
+                    Success = false,
+                    Message=$"An error occurred when deleting the country: {ex.Message}",
+                };
             }
         }
     }
