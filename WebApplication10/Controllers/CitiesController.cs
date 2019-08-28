@@ -34,9 +34,5 @@ namespace WebApplication10.Controllers
             var resources = mapper.Map<IEnumerable<City>, IEnumerable<CityResource>>(cities);
             return resources;
         }
-
-
-
-
     }
 }
