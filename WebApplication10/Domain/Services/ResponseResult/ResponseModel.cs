@@ -5,15 +5,23 @@ using System.Threading.Tasks;
 
 namespace WebApplication10.Domain.Services.ResponseResult
 {
-    public abstract class ResponseModel
+    public class ResponseModel<T>
     {
         public bool Success { get; set; }
+        public T Data { get; set; }
         public string Message { get; set; }
 
-        public ResponseModel(bool success, string message)
-        {
-            Success = success;
-            Message = message;
-        }
+        //public ResponseModel(bool success, T data, string message)
+        //{
+        //    Success = success;
+        //    Data = data;
+        //    Message = message;           
+        //}
+        //public ResponseModel(T data) : this(true, data, string.Empty)
+        //{ }
+
+        //public ResponseModel(string message) : this(false, message)
+        //{ }
+
     }
 }

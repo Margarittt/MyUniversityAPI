@@ -10,7 +10,7 @@ namespace WebApplication10.Domain.Services
     public interface ICountryService
     {
         Task<IEnumerable<Country>> ListAsync();
-        Task<CountryResponse> SaveAsync(Country country);
+        Task<ResponseModel<Country>> SaveAsync(Country country);
         Task<CountryResponse> UpdateAsync(int id, Country country);
         Task<CountryResponse> DeleteAsync(int id);
     }

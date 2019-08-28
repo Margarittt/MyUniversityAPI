@@ -13,6 +13,7 @@ namespace WebApplication10.Mapping
         public ModelToResourceProfile()
         {
             CreateMap<Country, CountryResource>();
+            CreateMap<City, CityResource>();
         }
     }
 }

@@ -34,6 +34,15 @@ namespace WebApplication10.Persistence.Context
             builder.Entity<City>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<City>().HasMany(p => p.Universities).WithOne(p => p.City).HasForeignKey(p => p.CityId);
 
+            builder.Entity<City>().HasData
+           (
+               new City { Id = 1, Name = "Yerevan", CountryId = 1},
+               new City { Id = 2, Name = "Gyumri", CountryId = 1},
+               new City { Id = 3, Name = "New York", CountryId = 2},
+               new City { Id = 4, Name = "Cambridge", CountryId = 2 }
+
+           );
+
             builder.Entity<University>().ToTable("Universities");
             builder.Entity<University>().HasKey(p => p.Id);
             builder.Entity<University>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
