@@ -31,9 +31,10 @@ namespace WebApplication10
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped<ICountryRepository, CountryRepository>();
-            services.AddScoped<ICountryService, CountryService>();
-            services.AddScoped<ICityService, CityService>();
+            services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICountryService, CountryService>();            
+            services.AddScoped<ICityService, CityService>();           
             services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(c =>
             {

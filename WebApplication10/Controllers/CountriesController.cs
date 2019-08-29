@@ -31,12 +31,12 @@ namespace WebApplication10.Controllers
             var resources = mapper.Map<IEnumerable<Country>, IEnumerable<CountryResource>>(countries);
             return resources;
         }
+
         /// <summary>
         /// Create a new country
         /// </summary>
         /// <param name="resource">Country data</param>
         /// <returns>Response result</returns>
-
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] SaveCountryResource resource)
         {
@@ -46,8 +46,8 @@ namespace WebApplication10.Controllers
             if (!result.Success)
                 return BadRequest(result);
 
-            //var countryResource = mapper.Map<Country, CountryResource>(result.Data);
-            
+            var countryResource = mapper.Map<Country, CountryResource>(country);
+            result.Data = countryResource;
             return Ok(result);
         }
 
@@ -66,7 +66,9 @@ namespace WebApplication10.Controllers
             if (!result.Success)
                 return BadRequest(result);
 
-            //var countryResource = mapper.Map<Country, CountryResource>(result.Data);
+            var countryResource = mapper.Map<Country, CountryResource>(country);
+            countryResource.Id = id;
+            result.Data = countryResource;
             return Ok(result);
         }
         /// <summary>
@@ -81,8 +83,6 @@ namespace WebApplication10.Controllers
 
             if (!result.Success)
                 return BadRequest(result);
-
-            //var countryResource = mapper.Map<Country, CountryResource>(result.Data);
             return Ok(result);
         }
     }

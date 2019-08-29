@@ -19,5 +19,23 @@ namespace WebApplication10.Persistence.Repositories
             return await context.Cities.Include(p => p.Country)
                                           .ToListAsync();
         }
+        public async Task AddAsync(City city)
+        {
+            await context.Cities.AddAsync(city);
+        }
+        public async Task<City> FindByIdAsync(int id)
+        {
+           return  await context.Cities.FindAsync(id);
+        }
+
+        public void Update(City city)
+        {
+            context.Cities.Update(city);
+        }
+
+        public void Remove(City city)
+        {
+            context.Cities.Remove(city);
+        }
     }
 }

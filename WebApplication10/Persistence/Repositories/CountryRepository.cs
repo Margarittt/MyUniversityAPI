@@ -23,8 +23,7 @@ namespace WebApplication10.Persistence.Repositories
         public async Task<Country> FindByIdAsync(int id)
         {
             return await context.Countries.FindAsync(id);
-        }
-
+        } 
         public void Update(Country country)
         {
             context.Countries.Update(country);
