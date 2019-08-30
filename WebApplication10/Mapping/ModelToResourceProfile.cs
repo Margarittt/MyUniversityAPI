@@ -1,8 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WebApplication10.Domain.Models;
 using WebApplication10.Resources;
 
@@ -14,6 +10,7 @@ namespace WebApplication10.Mapping
         {
             CreateMap<Country, CountryResource>();
             CreateMap<City, CityResource>();
+            CreateMap<University, UniversityResource>();
         }
     }
 }

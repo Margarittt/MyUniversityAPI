@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190830151104_WebApplication10.Persistence.Context.AppDbContext.cs" />
+    <Compile Remove="Migrations\20190830151104_WebApplication10.Persistence.Context.AppDbContext.Designer.cs" />
+    <Compile Remove="Migrations\20190830152054_WebApplication10.Persistence.Context.AppDbContext.cs" />
+    <Compile Remove="Migrations\20190830152054_WebApplication10.Persistence.Context.AppDbContext.Designer.cs" />
+    <Compile Remove="Migrations\20190830152735_WebApplication10.Persistence.Context.AppDbContext.cs" />
+    <Compile Remove="Migrations\20190830152735_WebApplication10.Persistence.Context.AppDbContext.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />

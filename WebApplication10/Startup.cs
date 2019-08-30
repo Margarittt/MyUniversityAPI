@@ -32,9 +32,11 @@ namespace WebApplication10
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
+            services.AddScoped<IUniversityRepository, UniversityRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICountryService, CountryService>();            
-            services.AddScoped<ICityService, CityService>();           
+            services.AddScoped<ICityService, CityService>();
+            services.AddScoped<IUniversityService, UniversityService>();
             services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(c =>
             {

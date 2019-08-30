@@ -81,41 +81,13 @@ namespace WebApplication10.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Lecturers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    FacultyId = table.Column<int>(nullable: true),
-                    UniversityId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Lecturers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Lecturers_Faculties_FacultyId",
-                        column: x => x.FacultyId,
-                        principalTable: "Faculties",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Lecturers_Universities_UniversityId",
-                        column: x => x.UniversityId,
-                        principalTable: "Universities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Students",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    FacultyId = table.Column<int>(nullable: true),
-                    UniversityId = table.Column<int>(nullable: true)
+                    FacultyId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -125,13 +97,7 @@ namespace WebApplication10.Migrations
                         column: x => x.FacultyId,
                         principalTable: "Faculties",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Students_Universities_UniversityId",
-                        column: x => x.UniversityId,
-                        principalTable: "Universities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -149,6 +115,43 @@ namespace WebApplication10.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[] { 3, "France" });
 
+            migrationBuilder.InsertData(
+                table: "Cities",
+                columns: new[] { "Id", "CountryId", "Name" },
+                values: new object[,]
+                {
+                    { 1, 1, "Yerevan" },
+                    { 2, 1, "Gyumri" },
+                    { 3, 2, "New York" },
+                    { 4, 2, "Cambridge" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Universities",
+                columns: new[] { "Id", "CityId", "Name" },
+                values: new object[,]
+                {
+                    { 1, 1, "NPUA" },
+                    { 2, 1, "EPH" },
+                    { 3, 2, "MIT" },
+                    { 4, 2, "Oxford" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Faculties",
+                columns: new[] { "Id", "Name", "UniversityId" },
+                values: new object[] { 1, "Security", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Faculties",
+                columns: new[] { "Id", "Name", "UniversityId" },
+                values: new object[] { 2, "Software Engineering", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Students",
+                columns: new[] { "Id", "FacultyId", "Name" },
+                values: new object[] { 1, 1, "Margarit Safaryan" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Cities_CountryId",
                 table: "Cities",
@@ -160,24 +163,9 @@ namespace WebApplication10.Migrations
                 column: "UniversityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Lecturers_FacultyId",
-                table: "Lecturers",
-                column: "FacultyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Lecturers_UniversityId",
-                table: "Lecturers",
-                column: "UniversityId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Students_FacultyId",
                 table: "Students",
                 column: "FacultyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Students_UniversityId",
-                table: "Students",
-                column: "UniversityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Universities_CityId",
@@ -187,9 +175,6 @@ namespace WebApplication10.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Lecturers");
-
             migrationBuilder.DropTable(
                 name: "Students");
 

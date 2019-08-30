@@ -14,7 +14,7 @@ namespace WebApplication10.Mapping
         {
             CreateMap<SaveCountryResource, Country>();
             CreateMap<SaveCityResource, City>();
-            //CreateMap<CityQueryResource, CityQuery>();
+            CreateMap<SaveUniversityResource, University>();
         }
     }
 }

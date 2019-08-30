@@ -47,9 +47,6 @@ namespace WebApplication10.Controllers
 
             if (!result.Success)
                 return BadRequest(result);
-
-            var cityResource = mapper.Map<City, CityResource>(city);
-            result.Data = cityResource;
             return Ok(result);
         }
 
@@ -67,10 +64,6 @@ namespace WebApplication10.Controllers
 
             if (!result.Success)
                 return BadRequest(result);
-
-            var cityResource =  mapper.Map<City, CityResource>(city);
-            cityResource.Id = id;
-            result.Data = cityResource;
             return Ok(result);
         }
 

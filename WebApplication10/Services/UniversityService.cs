@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using WebApplication10.Controllers;
 using WebApplication10.Domain.Models;
 using WebApplication10.Domain.Repositories;
 using WebApplication10.Domain.Services;
@@ -10,49 +9,49 @@ using WebApplication10.Resources;
 
 namespace WebApplication10.Services
 {
-    public class CityService : ICityService
+    public class UniversityService : IUniversityService
     {
-        private readonly ICountryRepository countryRepository;
         private readonly ICityRepository cityRepository;
+        private readonly IUniversityRepository universityRepository;
         private readonly IMapper mapper;
         private readonly IUnitOfWork unitOfWork;
-        public CityService(ICityRepository cityRepository,IUnitOfWork unitOfWork, ICountryRepository countryRepository, IMapper mapper)
+        public UniversityService(IUniversityRepository universityRepository, IUnitOfWork unitOfWork, ICityRepository cityRepository, IMapper mapper)
         {
-            this.countryRepository = countryRepository;
             this.cityRepository = cityRepository;
+            this.universityRepository = universityRepository;
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<City>> ListAsync()
+        public async Task<IEnumerable<University>> ListAsync()
         {
-            return await cityRepository.ListAsync();
+            return await universityRepository.ListAsync();
         }
 
-        public async Task<ResponseModel<CityResource>> SaveAsync(City city)
+        public async Task<ResponseModel<UniversityResource>> SaveAsync(University university)
         {
             try
             {
-                var existingCountry = await countryRepository.FindByIdAsync(city.CountryId);
-                if (existingCountry == null)
-                    return new ResponseModel<CityResource>()
+                var existingCity = await cityRepository.FindByIdAsync(university.CityId);
+                if (existingCity == null)
+                    return new ResponseModel<UniversityResource>()
                     {
                         Success = false,
-                        Message= "Invalid country."
+                        Message = "Invalid city."
                     };
-                await cityRepository.AddAsync(city);
+                await universityRepository.AddAsync(university);
                 await unitOfWork.CompleteAsync();
-                var cityResource = mapper.Map<City, CityResource>(city);
-                return new ResponseModel<CityResource>()
+                var universityResource = mapper.Map<University, UniversityResource>(university);             
+                return new ResponseModel<UniversityResource>()
                 {
                     Success = true,
-                    Data = cityResource,
+                    Data = universityResource,
                     Message = "Successfully added!"
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return new ResponseModel<CityResource>()
+                return new ResponseModel<UniversityResource>()
                 {
                     Success = false,
                     Message = $"An error occurred when saving the country: { ex.Message}"
@@ -60,55 +59,55 @@ namespace WebApplication10.Services
             }
         }
 
-        public async Task<ResponseModel<CityResource>> UpdateAsync(int id,City city)
+        public async Task<ResponseModel<UniversityResource>> UpdateAsync(int id, University university)
         {
-            var existingCity = await cityRepository.FindByIdAsync(id);
-            if(existingCity==null)
+            var existingUniversity = await universityRepository.FindByIdAsync(id);
+            if (existingUniversity == null)
             {
-                return new ResponseModel<CityResource>()
+                return new ResponseModel<UniversityResource>()
                 {
                     Success = false,
                     Message = "City not found!"
                 };
             }
 
-            var existingCountry = await countryRepository.FindByIdAsync(city.CountryId);
-            if (existingCountry == null)
-                return new ResponseModel<CityResource>()
+            var existingCity = await cityRepository.FindByIdAsync(university.CityId);
+            if (existingCity == null)
+                return new ResponseModel<UniversityResource>()
                 {
                     Success = false,
-                    Message = "Invalid country."
+                    Message = "Invalid city."
                 };
 
-            existingCity.Name = city.Name;
-            existingCity.Country = existingCountry;
+            existingUniversity.Name = university.Name;
+            existingUniversity.City = existingCity;
             try
             {
-                cityRepository.Update(existingCity);
+                universityRepository.Update(existingUniversity);
                 await unitOfWork.CompleteAsync();
-                var cityResource = mapper.Map<City, CityResource>(existingCity);
-                return new ResponseModel<CityResource>()
+                var universityResource = mapper.Map<University, UniversityResource>(existingUniversity);
+                return new ResponseModel<UniversityResource>()
                 {
                     Success = true,
-                    Data = cityResource,
+                    Data = universityResource,
                     Message = "Succesfully updated!"
                 };
             }
             catch (Exception ex)
             {
-                return new ResponseModel<CityResource>()
+                return new ResponseModel<UniversityResource>()
                 {
                     Success = false,
                     Message = $"An error occurred when saving the country: { ex.Message}"
                 };
-            }            
+            }
         }
-        public async Task<ResponseModel<CityResource>> DeleteAsync(int id)
+        public async Task<ResponseModel<UniversityResource>> DeleteAsync(int id)
         {
             var existingCity = await cityRepository.FindByIdAsync(id);
-            if (existingCity==null)
+            if (existingCity == null)
             {
-                return new ResponseModel<CityResource>()
+                return new ResponseModel<UniversityResource>()
                 {
                     Success = false,
                     Message = "City not found!"
@@ -118,15 +117,15 @@ namespace WebApplication10.Services
             {
                 cityRepository.Remove(existingCity);
                 await unitOfWork.CompleteAsync();
-                return new ResponseModel<CityResource>()
+                return new ResponseModel<UniversityResource>()
                 {
                     Success = true,
                     Message = "Succesfully removed!"
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return new ResponseModel<CityResource>()
+                return new ResponseModel<UniversityResource>()
                 {
                     Success = false,
                     Message = $"An error occurred when saving the country: { ex.Message}"
