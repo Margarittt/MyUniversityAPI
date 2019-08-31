@@ -54,7 +54,7 @@ namespace WebApplication10.Services
                 return new ResponseModel<UniversityResource>()
                 {
                     Success = false,
-                    Message = $"An error occurred when saving the country: { ex.Message}"
+                    Message = $"An error occurred when saving the university: { ex.Message}"
                 };
             }
         }
@@ -67,7 +67,7 @@ namespace WebApplication10.Services
                 return new ResponseModel<UniversityResource>()
                 {
                     Success = false,
-                    Message = "City not found!"
+                    Message = "University not found!"
                 };
             }
 
@@ -98,24 +98,24 @@ namespace WebApplication10.Services
                 return new ResponseModel<UniversityResource>()
                 {
                     Success = false,
-                    Message = $"An error occurred when saving the country: { ex.Message}"
+                    Message = $"An error occurred when updating the university: { ex.Message}"
                 };
             }
         }
         public async Task<ResponseModel<UniversityResource>> DeleteAsync(int id)
         {
-            var existingCity = await cityRepository.FindByIdAsync(id);
-            if (existingCity == null)
+            var existingUniversity = await universityRepository.FindByIdAsync(id);
+            if (existingUniversity == null)
             {
                 return new ResponseModel<UniversityResource>()
                 {
                     Success = false,
-                    Message = "City not found!"
+                    Message = "University not found!"
                 };
             }
             try
             {
-                cityRepository.Remove(existingCity);
+                universityRepository.Remove(existingUniversity);
                 await unitOfWork.CompleteAsync();
                 return new ResponseModel<UniversityResource>()
                 {
@@ -128,7 +128,7 @@ namespace WebApplication10.Services
                 return new ResponseModel<UniversityResource>()
                 {
                     Success = false,
-                    Message = $"An error occurred when saving the country: { ex.Message}"
+                    Message = $"An error occurred when removing the university: { ex.Message}"
                 };
             }
         }

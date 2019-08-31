@@ -33,10 +33,14 @@ namespace WebApplication10
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IUniversityRepository, UniversityRepository>();
+            services.AddScoped<IFacultyRepository, FacultyRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICountryService, CountryService>();            
             services.AddScoped<ICityService, CityService>();
             services.AddScoped<IUniversityService, UniversityService>();
+            services.AddScoped<IFacultyService, FacultyService>();
+            services.AddScoped<IStudentService, StudentService>();
             services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(c =>
             {

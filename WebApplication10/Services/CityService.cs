@@ -55,7 +55,7 @@ namespace WebApplication10.Services
                 return new ResponseModel<CityResource>()
                 {
                     Success = false,
-                    Message = $"An error occurred when saving the country: { ex.Message}"
+                    Message = $"An error occurred when saving the city: { ex.Message}"
                 };
             }
         }
@@ -99,7 +99,7 @@ namespace WebApplication10.Services
                 return new ResponseModel<CityResource>()
                 {
                     Success = false,
-                    Message = $"An error occurred when saving the country: { ex.Message}"
+                    Message = $"An error occurred when updating the city: { ex.Message}"
                 };
             }            
         }
@@ -129,7 +129,7 @@ namespace WebApplication10.Services
                 return new ResponseModel<CityResource>()
                 {
                     Success = false,
-                    Message = $"An error occurred when saving the country: { ex.Message}"
+                    Message = $"An error occurred when removing the city: { ex.Message}"
                 };
             }
         }

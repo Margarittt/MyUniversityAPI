@@ -73,7 +73,7 @@ namespace WebApplication10.Services
                 return new ResponseModel<CountryResource>()
                 {
                     Success = false,
-                    Message = $"An error occurred when saving the country: {ex.Message}"
+                    Message = $"An error occurred when updating the country: {ex.Message}"
                 };
             }
         }
@@ -104,7 +104,7 @@ namespace WebApplication10.Services
                 return new ResponseModel<CountryResource>()
                 {
                     Success = false,
-                    Message=$"An error occurred when deleting the country: {ex.Message}",
+                    Message=$"An error occurred when removing the country: {ex.Message}",
                 };
             }
         }

@@ -11,6 +11,8 @@ namespace WebApplication10.Mapping
             CreateMap<Country, CountryResource>();
             CreateMap<City, CityResource>();
             CreateMap<University, UniversityResource>();
+            CreateMap<Faculty, FacultyResource>();
+            CreateMap<Student, StudentResource>();
         }
     }
 }
